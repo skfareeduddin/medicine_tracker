@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Daily Schedule</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<h2>Daily Medicine Schedule</h2>
+
+<a href="/dashboard">Back</a>
+
+<table>
+
+<tr>
+<th>Medicine</th>
+<th>Dosage</th>
+<th>Reminder Time</th>
+</tr>
+
+{% for med in medicines %}
+
+<tr>
+
+<td>{{med.name}}</td>
+<td>{{med.dosage}}</td>
+<td>{{med.reminder_time}}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+
+</html>

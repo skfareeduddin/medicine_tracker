@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Medicine History</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Medicine History</h2>
+
+<nav>
+<a href="/dashboard">Dashboard</a>
+</nav>
+
+<table>
+
+<tr>
+<th>Medicine</th>
+<th>Date</th>
+<th>Time</th>
+</tr>
+
+{% for h in history %}
+
+<tr>
+
+<td>{{ h.medicine_name }}</td>
+
+<td>{{ h.taken_time.split(" ")[0] }} {{ h.taken_time.split(" ")[1] }} {{ h.taken_time.split(" ")[2] }}</td>
+
+<td>{{ h.taken_time.split(" ")[3] }} {{ h.taken_time.split(" ")[4] }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

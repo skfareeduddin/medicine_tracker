@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Edit Medicine</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Edit Medicine</h2>
+
+<form method="POST">
+
+<input type="text" name="name" value="{{medicine.name}}" required>
+
+<input type="text" name="dosage" value="{{medicine.dosage}}">
+
+<input type="number" name="stock" value="{{medicine.stock}}">
+
+<h3>Reminders</h3>
+
+<div id="reminders">
+
+{% for r in reminders %}
+
+<div class="reminder-row">
+
+<input type="time" name="reminder" value="{{r.reminder_time}}">
+
+<button type="button" onclick="removeReminder(this)">Remove</button>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<button type="button" onclick="addReminder()">Add Another Reminder</button>
+
+<br><br>
+
+<button type="submit">Update Medicine</button>
+
+</form>
+
+</div>
+
+<script>
+
+function addReminder(){
+
+var container=document.getElementById("reminders")
+
+var div=document.createElement("div")
+div.className="reminder-row"
+
+var input=document.createElement("input")
+input.type="time"
+input.name="reminder"
+
+var btn=document.createElement("button")
+btn.type="button"
+btn.innerText="Remove"
+btn.onclick=function(){removeReminder(btn)}
+
+div.appendChild(input)
+div.appendChild(btn)
+
+container.appendChild(div)
+
+}
+
+function removeReminder(button){
+
+button.parentElement.remove()
+
+}
+
+</script>
+
+</body>
+</html>

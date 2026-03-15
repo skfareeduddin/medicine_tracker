@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Medicine Dashboard</title>
+<link rel="stylesheet" href="/static/style.css">
+<script src="/static/reminder.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Medicine Dashboard</h2>
+
+<nav>
+<a href="/add">Add Medicine</a>
+<a href="/history">Medicine History</a>
+<a href="/logout">Logout</a>
+</nav>
+
+<table>
+
+<tr>
+<th>Medicine</th>
+<th>Dosage</th>
+<th>Stock</th>
+<th>Reminders</th>
+<th>Actions</th>
+</tr>
+
+{% for med in medicines %}
+
+<tr>
+
+<td>{{med.name}}</td>
+
+<td>{{med.dosage}}</td>
+
+<td>
+
+{{med.stock}}
+
+{% if med.stock <= 5 %}
+<div class="low-stock">Low Stock</div>
+{% endif %}
+
+</td>
+
+<td>
+
+{% for r in reminder_map[med.id] %}
+<span class="reminder">{{ (r.reminder_time.split(":")[0]|int % 12 if (r.reminder_time.split(":")[0]|int % 12)!=0 else 12) }}:{{r.reminder_time.split(":")[1]}} {{ "PM" if r.reminder_time.split(":")[0]|int >=12 else "AM" }}</span>
+{% endfor %}
+
+</td>
+
+<td>
+
+<a class="action-btn take-btn" href="/taken/{{med.id}}">Taken</a>
+
+<a class="action-btn" style="background:#f39c12;color:white;" href="/edit/{{med.id}}">Edit</a>
+
+<a class="action-btn delete-btn" href="/delete/{{med.id}}">Delete</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>
