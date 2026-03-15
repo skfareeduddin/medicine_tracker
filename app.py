@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user, UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
+import pytz
 
 app = Flask(__name__)
 
@@ -160,11 +161,12 @@ def taken(id):
     if medicine.stock > 0:
         medicine.stock -= 1
 
-    current_time = datetime.now()
+    ist = pytz.timezone("Asia/Kolkata")
+    current_time = datetime.now(ist)
 
     history = History(
         medicine_name=medicine.name,
-        taken_time=datetime.now().strftime("%d %b %Y  %I:%M %p"),
+        taken_time=current_time.strftime("%d %b %Y %I:%M %p"),
         user_id=current_user.id
     )
 
